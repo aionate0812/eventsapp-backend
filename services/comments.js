@@ -7,9 +7,11 @@ commentsService.addComment = (user,event,body) => {
 }
 
 commentsService.getComments = (event) => {
-    return db.many('SELECT user_id, message FROM comments WHERE event_id=${event}', {event})
+    return db.many('SELECT id, user_id, message FROM comments WHERE event_id=${event}', {event})
 }
 
 commentsService.removeComment = (id) => {
-    return db.none('DELETE FROM comments WHERE id=${id}')
+    return db.none('DELETE FROM comments WHERE id=${id}', {id})
 }
+
+module.exports = commentsService

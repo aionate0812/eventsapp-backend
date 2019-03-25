@@ -11,7 +11,7 @@ userInterestsService.getInterest = (user) => {
 }
 
 userInterestsService.deleteInterest = (user,interest) => {
-    return db.none('DELETE FROM user_interested WHERE user_id=${user} AND interest_id=${interest}', {user,interest})
+    return db.none('DELETE FROM user_interested WHERE user_id=${user} AND interests_id=${interest}', {user,interest})
 }
 
 module.exports = userInterestsService
