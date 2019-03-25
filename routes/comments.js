@@ -17,21 +17,28 @@ commentsRouter.post('/:username', (req,res)=>{
 
 commentsRouter.get('/:event', (req,res) => {
     const {event} = req.params
-    commentsService.getComments(event).then(user => {
-        res.send(user)
+    commentsService.getComments(event)
+    .then(comments => {
+        res.status(200)
+        res.json({comments:comments})
     }, err => {
+        res.status(400)
+        res.json({msg:'Could not get comments'})
         console.log(err)
     })
 })
 
 commentsRouter.delete('/:comment_id', (req,res) => {
     const {comment_id} = req.params
-    commentsService.removeComment(comment_id).then(user => {
-        res.send(user)
+    commentsService.removeComment(comment_id)
+    .then(r => {
+        res.status(200)
+        res.send({msg:'Comment deleted', response:r})
     }, err => {
+        res.status(400)
+        res.json({msg:'Error deleting the comment'})
         console.log(err)
     })
 })
-
 
 module.exports = commentsRouter
