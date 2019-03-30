@@ -1,6 +1,6 @@
 const express = require('express')
 const userInterestsRouter = express.Router()
-const userInterestsService = require('../services/user_interests')
+const userInterestsService = require('../services/user-interests')
 
 userInterestsRouter.get('/:user_id', (req,res) => {
     const {user_id} = req.params
