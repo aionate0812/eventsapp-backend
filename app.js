@@ -29,7 +29,7 @@ const checkFirebaseToken = (req,res,next) => {
 }
 
 app.use('/user', userRouter)
-app.use('/comments', checkFirebaseToken, commentsRouter)
+app.use('/comments', commentsRouter)
 app.use('/followers', followersRouter)
 app.use('/user_interests', userInterestsRouter)
 app.use('/likes', likesRouter)
