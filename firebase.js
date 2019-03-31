@@ -1,8 +1,8 @@
 const admin = require('firebase-admin');
-const serviceAccount = require('./firebase.json');
+const serviceAccount = process.env.FIREBASE_API || require('./firebase.json');
 
 admin.initializeApp({
-  credential: admin.credential.cert(process.env.FIREBASE_API || serviceAccount),
+  credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://eventsapp-frontend-auth.firebaseio.com"
 });
 
