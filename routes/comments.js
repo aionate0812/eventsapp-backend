@@ -3,7 +3,8 @@ const commentsRouter = express.Router()
 const commentsService = require('../services/comments')
 
 commentsRouter.post('/:username', (req,res)=>{
-    const {username,event,body} = req.body
+    const {username} = req.params
+    const {event,body} = req.body
     commentsService.addComment(username,event,body)
     .then( r => {
         res.status(200)

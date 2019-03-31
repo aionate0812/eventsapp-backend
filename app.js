@@ -11,7 +11,7 @@ const interestsRouter = require('./routes/interests')
 
 const app = express()
 
-app.use(cors)
+// app.use(cors)
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
@@ -21,6 +21,7 @@ const checkFirebaseToken = (req,res,next) => {
     admin.auth().verifyIdToken(token)
     .then((decodedToken)=>{
         const uid = decodedToken.uid
+        console.log(decodedToken)
         next()
     }).catch(err => {
         res.json({err})
@@ -28,7 +29,7 @@ const checkFirebaseToken = (req,res,next) => {
 }
 
 app.use('/user', userRouter)
-app.use('/comments', commentsRouter)
+app.use('/comments', checkFirebaseToken, commentsRouter)
 app.use('/followers', followersRouter)
 app.use('/user_interests', userInterestsRouter)
 app.use('/likes', likesRouter)

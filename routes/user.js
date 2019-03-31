@@ -1,6 +1,22 @@
 const express = require('express')
 const userRouter = express.Router()
 const userService = require('../services/user')
+const admin = require('../firebase')
+
+
+const checkFirebaseToken = (req,res,next) => {
+    const {token} = req.body
+
+    admin.auth().verifyIdToken(token)
+    .then((decodedToken)=>{
+        const uid = decodedToken.uid
+        console.log(decodedToken)
+        next()
+    }).catch(err => {
+        res.json({err})
+    })
+}
+
 
 userRouter.get('/:username', (req,res)=>{
     const {username} = req.params
