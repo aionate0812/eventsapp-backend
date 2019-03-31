@@ -18,7 +18,7 @@ const checkFirebaseToken = (req,res,next) => {
 }
 
 
-userRouter.get('/:username', (req,res)=>{
+userRouter.get('/:username', checkFirebaseToken, (req,res)=>{
     const {username} = req.params
     userService.read(username)
     .then(user => {
